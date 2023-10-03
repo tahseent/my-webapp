@@ -6,6 +6,10 @@ pipeline
         }
 	stages 
     {
+	    stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'tahseent', url: 'https://github.com/tahseent/my-webapp.git'
+            }
 		stage ('Build') 
         {
 			steps
