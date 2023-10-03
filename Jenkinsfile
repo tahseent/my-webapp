@@ -3,15 +3,11 @@ pipeline
 	agent any
 	tools{
 		    maven 'maven'
+		      git 'git'
         }
 	stages 
     {
-	    stage('Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'tahseent', url: 'https://github.com/tahseent/my-webapp.git'
-            }
-	    }
-		stage ('Build') 
+	   	stage ('Build') 
         {
 			steps
             {
