@@ -11,6 +11,7 @@ pipeline
         {
 			steps
             {
+		    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '6d59937b-1b6d-4feb-b401-43c800670887', url: 'https://github.com/tahseent/my-webapp.git']])
                 sh 'mvn clean package'
 			}
 		    post 
