@@ -6,6 +6,12 @@ pipeline
         }
 	stages 
     {
+		stage('Checkout') {
+            steps {
+                // Check out your Maven project from GitHub
+                git 'https://github.com/tahseent/my-webapp.git'
+            }
+        }
 		
 		stage ('Build') 
         {
