@@ -1,27 +1,18 @@
-pipeline {
-    agent any
-    tools{
-        maven "maven"
+node{
+    def tomcatWeb = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\webapps'
+    def tomcatBin = 'C:\\Program Files\\Apache Software Foundation\\Tomcat 9.0\\bin'
+    def tomcatStatus = ''
+    stage('SCM Checkout')
+    {
+        git 'https://github.com/tahseent/my-webapp.git'
     }
-
-    stages{
-        stage('Checkout')
-        {
-            steps{
-                    git 'https://github.com/tahseent/my-webapp.git'   
-            }
-        }
-        stage('Build')
-        {
-            steps{
-                sh 'mvn clean package'
-            }
-        }
-        stage('Deploy')
-        {
-            steps{
-                deploy adapters: [tomcat9(credentialsId: '374837a6-ae18-40da-86d2-5c87428223e3', path: '', url: 'http://localhost:8080/')], contextPath: null, war: '**/*.war'
-            }
-        }
+    stage('create war file')
+    {
+        def mvnHome = tool name: 'maven' , type: 'maven'
+        bat "${mvnHome}/bin/mvn package"
     }
+    stage('Deploy')
+    {
+        bat "copy target\\my-webapp.war \"${tomcatWeb}\\my-webapp.war\""
     }
+}
