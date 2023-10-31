@@ -3,8 +3,8 @@ pipeline {
     
     environment {
         TOMCAT_URL = 'http://localhost:8080' // Update with your Tomcat URL
-        TOMCAT_MANAGER_USER = 'tahseen' // Update with your Tomcat Manager username
-        TOMCAT_MANAGER_PASS = 'Abc@1234' // Update with your Tomcat Manager password
+        TOMCAT_MANAGER_USER = 'deploy' // Update with your Tomcat Manager username
+        TOMCAT_MANAGER_PASS = 'deploy' // Update with your Tomcat Manager password
     }
     
     stages {
@@ -16,7 +16,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'mvn clean package' // Or any other Maven build commands
+                build 'target/my-webapp.war' // Or any other Maven build commands
             }
         }
         
